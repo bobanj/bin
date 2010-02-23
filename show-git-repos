@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+#
+# Call: "show-git-repos 2> /dev/null" to redirect stderr to /dev/null
+#
+
+#$stderr = Class.new do 
+#  def write(*args); end
+#end.new
+
+def list_git_repos(root = "~/")
+  `find #{root} -name .git -type d`.split("\n")
+end
+
+found = list_git_repos.map{|path| [$1, path] if IO.readlines("#{path}/config").join =~ /url = (ssh:.+)/}.compact.reject{|v| v.first !~ /juretta/}
+
+
+found.each do |pair|
+  puts "repo: #{pair.last} (#{pair.first})"
+end
+

@@ -1,0 +1,14 @@
+.project
+.settings
+.classpath
+target
+build
+bin
+_stefan
+src-stefan
+.DS_Store
+.svn
+lnk-*
+.vmimage
+_darcs
+log/*.log

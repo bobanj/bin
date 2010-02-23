@@ -1,0 +1,21 @@
+#!/usr/bin/ruby
+
+# PEM_FILE=localhost-tomcat.pem
+#
+# # import certificate
+# #openssl s_client -showcerts -connect localhost:443 > $PEM_FILE
+#
+
+if ARGV.length != 2
+  puts "Usage #{File.basename(__FILE__)} certfile alias"
+  exit 255
+end
+
+certfile = ARGV[0]
+alias_name = ARGV[1]
+
+cmd = "sudo keytool -import -trustcacerts -keystore #{ENV['JAVA_HOME']}/lib/security/cacerts -storepass changeit -noprompt -alias #{alias_name} -file #{certfile}"
+
+
+system cmd
+

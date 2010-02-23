@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ -z "$1" ]                # No argument passed?
+then
+  echo "$0 www.example.com"
+  exit 1
+fi
+
+
+REMHOST=$1
+REMPORT=${2:-443}
+
+
+
+#openssl s_client -connect ${REMHOST}:${REMPORT} -showcerts | openssl x509 -noout -text
+
+echo | openssl s_client -connect ${REMHOST}:${REMPORT} 2>&1 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' #> mycert.pem
