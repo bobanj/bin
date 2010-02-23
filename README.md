@@ -9,3 +9,8 @@ Import:
       . ~/bin/.bashrc
     fi
 
+
+Add ~/bin to your $PATH
+
+	export PATH=$PATH:~/bin
+
