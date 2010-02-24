@@ -11,6 +11,10 @@
 #    . ~/bin/.bashrc
 # fi
 
+CUSTOM_BIN_DIR=${HOME}/bin
+
+# custom bindings
+bind -f ${CUSTOM_BIN_DIR}/.bash_key_bindings
 
 ## ============================================================================
 ## Bash settings
