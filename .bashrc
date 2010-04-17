@@ -31,7 +31,7 @@ export PS1='\u@\h:\w$(__git_ps1 " (%s)") [\j]$ '
 complete -C rake_autocomplete.rb -o default rake
 
 # ~~~~~ cdargs ~~~~~~~~~~~~
-. ~/bin/cdargs-bash.sh
+#. ~/bin/cdargs-bash.sh
 
 # ~~~~~ Load git completion
 . ~/bin/.git-completion.bash
