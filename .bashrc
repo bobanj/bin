@@ -31,14 +31,23 @@ export PS1='\u@\h:\w$(__git_ps1 " (%s)") [\j]$ '
 complete -C rake_autocomplete.rb -o default rake
 
 # ~~~~~ cdargs ~~~~~~~~~~~~
-#. ~/bin/cdargs-bash.sh
+if [ -f /opt/local/etc/profile.d/cdargs-bash.sh ]; then
+  source /opt/local/etc/profile.d/cdargs-bash.sh
+fi
+
+# search path for cd
+#export CDPATH=$HOME/dev
 
 # ~~~~~ Load git completion
-. ~/bin/.git-completion.bash
+. ${CUSTOM_BIN_DIR}/.git-completion.bash
 
 ## ============================================================================
 ## Alias definitions
 ## ============================================================================
+
+# Tomcat
+alias tom="ps aux | grep \"\(tomcat\|java\)\" | grep -v grep"
+
 # Pushd/Popd
 alias pu="pushd"
 alias po="popd"
@@ -79,6 +88,9 @@ alias sha1sum="openssl dgst -sha1 "
 # List servers
 alias servers="sudo lsof -i -Pn"
 
+# IP (en0)
+alias myip="ruby -e 'print `ifconfig`.map{|line| $1.dup if line !~ /127\./ and line =~ /inet ([0-9.]+)/}.compact.first'"
+
 # tcpdump
 alias sniff="sudo tcpdump -s0 -i eth0 -A"
 alias couchgrep="sudo ngrep -W byline -d lo0 port 5984"
@@ -90,13 +102,13 @@ alias ds="ditz status"
 
 # ~~~~~ git
 alias gt="git status"
-alias gb='git branch -a -v'
+alias gb='git branch -v --color'
 alias gd='git diff --color --ignore-space-at-eol'
-alias gdi='git diff --cached'
+alias gdi='git diff --color --ignore-space-at-eol --cached'
 alias gds='git diff --stat'
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset - %Cblue[%an]%Creset%C(yellow)%d%Creset: %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias gls="git log --stat"
-alias glm='git log --author="Saasen" --pretty=format:"%Cblue%h%Creset %Cgreen%an%Creset %ad %s %n"'
+alias glm='git log --author="ssaasen" --pretty=format:"%Cblue%h%Creset %Cgreen%an%Creset %ad %s %n"'
 alias gw="git whatchanged"
 # Changelog style
 alias glc="git log --abbrev-commit --pretty=medium "
@@ -414,6 +426,11 @@ alias flushcache="dscacheutil -flushcache"
 
 # ~~~~~ Bash customization shortcut
 alias bashrc="mate -w ~/bin/.bashrc && source ~/.bash_profile && cp ~/bin/.irbrc ~/"
+
+# copy/paste
+alias pc=pbcopy
+alias pp=pbpaste
+alias cpwd="pwd | pbcopy"
 
 ## ============================================================================
 ## comments/stuff
