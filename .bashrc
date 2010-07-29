@@ -48,7 +48,11 @@ fi
 
 # ~~~~~ Load git completion
 #. ~/bin/.git-completion.bash
-. $GITHOME/contrib/completion/git-completion.bash
+if [ -f $GITHOME/contrib/completion/git-completion.bash ]; then
+	. $GITHOME/contrib/completion/git-completion.bash
+else
+	echo "warning: GITHOME is not defined."
+fi
 
 # Temporary (I guess somehow my git installation is borked)
 alias fixgitrepos="chmod 755 .git/hooks/{prepare-commit-msg,commit-msg,pre-commit}"
