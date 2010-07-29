@@ -15,3 +15,6 @@ lnk-*
 .vmimage
 _darcs
 log/*.log
+*.iwr
+*.iws
+*.iml
