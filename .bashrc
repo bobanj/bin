@@ -46,7 +46,7 @@ fi
 ## ============================================================================
 
 # Tomcat
-alias tom="ps aux | grep \"\(tomcat\|java\)\" | grep -v grep"
+alias tom="ps aux | grep \"catalina.startup.Bootstrap\" | grep -v grep"
 
 # Pushd/Popd
 alias pu="pushd"
@@ -426,11 +426,12 @@ alias flushcache="dscacheutil -flushcache"
 
 # ~~~~~ Bash customization shortcut
 alias bashrc="mate -w ~/bin/.bashrc && source ~/.bash_profile && cp ~/bin/.irbrc ~/"
+alias bashstats="cut -f1 -d\" \" ~/.bash_history | sort | uniq -c | sort -nr | head -n 50"
 
 # copy/paste
 alias pc=pbcopy
 alias pp=pbpaste
-alias cpwd="pwd | pbcopy"
+alias cpwd="pwd | tr -d '\n' | pbcopy"
 
 ## ============================================================================
 ## comments/stuff
