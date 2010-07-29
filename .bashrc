@@ -24,7 +24,15 @@ export HISTCONTROL=erasedups
 export HISTSIZE=10000
 shopt -s histappend
 
+
 # Bash prompt (with git branch)
+function parse_git_dirty {
+  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "(☠)"
+}
+function parse_git_branch {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/"
+}
+#export PS1='\[\033[01;32m\]\w $(git branch &>/dev/null; if [ $? -eq 0 ]; then echo "\[\033[01;34m\]$(parse_git_branch)"; fi) \$ \[\033[00m\]'
 export PS1='\u@\h:\w$(__git_ps1 " (%s)") [\j]$ '
 
 # Rake autocomplete
@@ -39,7 +47,11 @@ fi
 #export CDPATH=$HOME/dev
 
 # ~~~~~ Load git completion
-. ${CUSTOM_BIN_DIR}/.git-completion.bash
+#. ~/bin/.git-completion.bash
+. $GITHOME/contrib/completion/git-completion.bash
+
+# Temporary (I guess somehow my git installation is borked)
+alias fixgitrepos="chmod 755 .git/hooks/{prepare-commit-msg,commit-msg,pre-commit}"
 
 ## ============================================================================
 ## Alias definitions
@@ -102,7 +114,7 @@ alias ds="ditz status"
 
 # ~~~~~ git
 alias gt="git status"
-alias gb='git branch -v --color'
+alias gb='git branch --color -v'
 alias gd='git diff --color --ignore-space-at-eol'
 alias gdi='git diff --color --ignore-space-at-eol --cached'
 alias gds='git diff --stat'
