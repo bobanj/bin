@@ -85,6 +85,10 @@ alias d='dict'
 alias h='history'
 alias p="ps aux | grep ^$USER"
 
+
+# Maven
+alias madness='mvn org.apache.maven.plugins:maven-dependency-plugin:RELEASE:tree'
+
 # Ruby/Rails
 alias ss="./script/server"
 alias sd="./script/server --debugger"
@@ -217,6 +221,17 @@ alias fh="od -c -N 16 "
 # Adds a site to an existing maven project.
 # ! Should be run from inside a maven project. 
 alias mvn-add-site="mvn archetype:create -DarchetypeArtifactId=maven-archetype-site"
+
+function mvn-help {
+  if [ ! $# == 1 ]; then
+    echo "Usage:       mvn-help PLUGINNAME"
+    echo ""
+    echo "    example: mvn-help install"
+    echo ""
+    return
+  fi
+	mvn help:describe -Dplugin=$1
+}
 
 function mvn-create {
   if [ ! $# == 2 ]; then
