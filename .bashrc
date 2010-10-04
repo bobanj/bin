@@ -13,6 +13,12 @@
 
 CUSTOM_BIN_DIR=${HOME}/bin
 
+
+if [ -f resty ]; then
+  . resty
+fi
+
+
 # custom bindings
 bind -f ${CUSTOM_BIN_DIR}/.bash_key_bindings
 
