@@ -32,14 +32,12 @@ shopt -s histappend
 
 
 # Bash prompt (with git branch)
-function parse_git_dirty {
-  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "(☠)"
+function prompt_char {
+    git branch >/dev/null 2>/dev/null && echo '±' && return
+    hg root >/dev/null 2>/dev/null && echo '☿' && return
+    echo ''
 }
-function parse_git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/"
-}
-#export PS1='\[\033[01;32m\]\w $(git branch &>/dev/null; if [ $? -eq 0 ]; then echo "\[\033[01;34m\]$(parse_git_branch)"; fi) \$ \[\033[00m\]'
-export PS1='\u@\h:\w$(__git_ps1 " (%s)") [\j]$ '
+export PS1='\u@\h:\w $(__git_ps1 "(\[\033[1;32m\]$(prompt_char)\[\033[0m\] \[\033[0;36m\] %s\[\033[0m\]) ")[\j]$ '
 
 # Rake autocomplete
 complete -C rake_autocomplete.rb -o default rake
