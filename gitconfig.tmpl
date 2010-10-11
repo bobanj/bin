@@ -1,0 +1,39 @@
+[core]
+	excludesfile = $HOME/.git-global-ignore
+[user]
+	name = Stefan Saasen
+    # email
+    editor = mvim
+[alias]
+	ci = commit
+	co = checkout
+	st = status
+[diff]
+	tool = diff
+[difftool "diffmerge"]
+	cmd = diffmerge \"$LOCAL\" \"$REMOTE\"
+[merge]
+	tool = diffmerge
+[mergetool "diffmerge"]
+	cmd = diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+	trustexitcode = false
+[github]
+	user = no
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+    
