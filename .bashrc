@@ -37,7 +37,14 @@ function prompt_char {
     hg root >/dev/null 2>/dev/null && echo '☿' && return
     echo ''
 }
-export PS1='\u@\h:\w $(__git_ps1 "(\[\033[1;32m\]$(prompt_char)\[\033[0m\] \[\033[0;36m\] %s\[\033[0m\]) ")[\j]$ '
+
+function parse_git_dirty {
+  [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo -n " \033[1;31m*\033[0m"
+  [[ $(git diff --cached --shortstat 2> /dev/null | tail -n1) != "" ]] && echo -n " \033[1;33m*\033[0m"
+}
+
+
+export PS1='\u@\h:\w $(__git_ps1 "(\[\033[1;32m\]$(prompt_char)\[\033[0m\]\[\033[0;36m\] %s\[\033[0m\]$(parse_git_dirty)) ")[\j]$ '
 
 # Rake autocomplete
 complete -C rake_autocomplete.rb -o default rake
