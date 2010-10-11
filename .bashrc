@@ -131,6 +131,7 @@ alias gd='git diff --color --ignore-space-at-eol'
 alias gdi='git diff --color --ignore-space-at-eol --cached'
 alias gds='git diff --stat'
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset - %Cblue[%an]%Creset%C(yellow)%d%Creset: %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
+alias gly="gl --since=yesterday"
 alias gls="git log --stat"
 alias glm='git log --author="ssaasen" --pretty=format:"%Cblue%h%Creset %Cgreen%an%Creset %ad %s %n"'
 alias gw="git whatchanged"
