@@ -30,6 +30,8 @@ export HISTCONTROL=erasedups
 export HISTSIZE=10000
 shopt -s histappend
 
+# Set xterm title
+export PROMPT_COMMAND='echo -ne "\033]0;$(basename `pwd`)\007"'
 
 # Bash prompt (with git branch)
 function prompt_char {
@@ -41,7 +43,7 @@ function prompt_char {
 function parse_git_dirty {
   [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo -n " \033[1;31m*\033[0m"
   [[ $(git diff --cached --shortstat 2> /dev/null | tail -n1) != "" ]] && echo -n " \033[1;33m*\033[0m"
-  [[ $(git status --porcelain 2>/dev/null| grep "^??" | wc -l) != "" ]] && echo -n " \033[0;36m*\033[0m"
+  [[ $(git status --porcelain 2>/dev/null| grep "^??" | tail -n1) != "" ]] && echo -n " \033[0;36m*\033[0m"
 }
 
 
