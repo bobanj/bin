@@ -27,7 +27,7 @@ bind -f ${CUSTOM_BIN_DIR}/.bash_key_bindings
 ## ============================================================================
 #Bash History
 export HISTCONTROL=erasedups
-export HISTSIZE=10000
+export HISTSIZE=5000
 shopt -s histappend
 
 # Set xterm title
