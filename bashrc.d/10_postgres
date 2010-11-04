@@ -1,0 +1,17 @@
+#########################################
+#                                       #
+# Postgres alias & function definition  #
+#                                       #
+#########################################
+
+function runPostgresCmd() {
+    sudo -u postgres -i "psql -c '${1}'"
+}
+
+# List current connections (assumes the PostgreSQL user is named 'postgres')
+alias postgres_conn="runPostgresCmd \"select datname, numbackends from pg_stat_database\""
+alias postgres_stat="runPostgresCmd \"SELECT * FROM pg_stat_activity;\""
+
+
+
+# vim: set filetype=bash

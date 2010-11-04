@@ -19,6 +19,15 @@ if [ -f resty ]; then
 fi
 
 
+# Include everything in .bashrc.d
+# Thanks to Tim Moore
+if [ -d ~/.bashrc.d ]; then
+    for bashrc in ~/bashrc.d/*; do
+        [ -f $bashrc ] || continue
+        . $bashrc
+    done
+fi
+
 # custom bindings
 bind -f ${CUSTOM_BIN_DIR}/.bash_key_bindings
 
