@@ -1,0 +1,7 @@
+# vim: set filetype=bash
+
+# Start a webserver on port 8000 that serves 
+# the contents of the local directory
+alias share='python -c "import SimpleHTTPServer;SimpleHTTPServer.test()"'
+
+
