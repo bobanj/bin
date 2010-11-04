@@ -27,6 +27,8 @@ if [ -d ~/.bashrc.d ]; then
         . $bashrc
     done
 fi
+# Include host-specific .bashrc file
+[ -f ~/bashrc.d/`hostname -s` ] && . ~/bashrc.d/`hostname -s`
 
 # custom bindings
 bind -f ${CUSTOM_BIN_DIR}/.bash_key_bindings
