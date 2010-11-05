@@ -21,14 +21,14 @@ fi
 
 # Include everything in .bashrc.d
 # Thanks to Tim Moore
-if [ -d ~/.bashrc.d ]; then
-    for bashrc in ~/bashrc.d/*; do
+if [ -d $CUSTOM_BIN_DIR/bashrc.d ]; then
+    for bashrc in $CUSTOM_BIN_DIR/bashrc.d/*; do
         [ -f $bashrc ] || continue
         . $bashrc
     done
 fi
 # Include host-specific .bashrc file
-[ -f ~/bashrc.d/`hostname -s` ] && . ~/bashrc.d/`hostname -s`
+[ -f $CUSTOM_BIN_DIR/bashrc.d/`hostname -s` ] && . $CUSTOM_BIN_DIR/bashrc.d/`hostname -s`
 
 # custom bindings
 bind -f ${CUSTOM_BIN_DIR}/.bash_key_bindings
