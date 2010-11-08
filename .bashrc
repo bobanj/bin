@@ -44,22 +44,6 @@ shopt -s histappend
 # Set xterm title
 export PROMPT_COMMAND='echo -ne "\033]0;$(basename `pwd`)\007"'
 
-# Bash prompt (with git branch)
-function prompt_char {
-    git branch >/dev/null 2>/dev/null && echo '±' && return
-    hg root >/dev/null 2>/dev/null && echo '☿' && return
-    echo ''
-}
-
-function parse_git_dirty {
-  [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo -n " \033[1;31m*\033[0m"
-  [[ $(git diff --cached --shortstat 2> /dev/null | tail -n1) != "" ]] && echo -n " \033[1;33m*\033[0m"
-  [[ $(git status --porcelain 2>/dev/null| grep "^??" | tail -n1) != "" ]] && echo -n " \033[0;36m*\033[0m"
-}
-
-
-export PS1='\u@\h:\w $(__git_ps1 "(\[\033[1;32m\]$(prompt_char)\[\033[0m\]\[\033[0;36m\] %s\[\033[0m\]$(parse_git_dirty)) ")[\j]$ '
-
 # Rake autocomplete
 complete -C rake_autocomplete.rb -o default rake
 
@@ -77,6 +61,25 @@ if [ -f $GITHOME/contrib/completion/git-completion.bash ]; then
 	. $GITHOME/contrib/completion/git-completion.bash
 else
 	echo "warning: GITHOME is not defined."
+fi
+
+# Bash prompt (with git branch)
+function prompt_char {
+    git branch >/dev/null 2>/dev/null && echo '±' && return
+    hg root >/dev/null 2>/dev/null && echo '☿' && return
+    echo ''
+}
+
+function parse_git_dirty {
+  #[[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo -n " \033[1;31m*\033[0m"
+  #[[ $(git diff --cached --shortstat 2> /dev/null | tail -n1) != "" ]] && echo -n " \033[1;33m*\033[0m"
+  #[[ $(git status --porcelain 2>/dev/null| grep "^??" | tail -n1) != "" ]] && echo -n " \033[0;36m*\033[0m"
+  echo ''
+}
+
+declare -f __git_ps1 >/dev/null
+if [ "$?" -eq "0" ]; then
+  export PS1='\u@\h:\w $(__git_ps1 "(\[\033[1;32m\]$(prompt_char)\[\033[0m\]\[\033[0;36m\] %s\[\033[0m\]$(parse_git_dirty)) ")[\j]$ '
 fi
 
 # Temporary (I guess somehow my git installation is borked)
