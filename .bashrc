@@ -89,6 +89,9 @@ alias fixgitrepos="chmod 755 .git/hooks/{prepare-commit-msg,commit-msg,pre-commi
 ## Alias definitions
 ## ============================================================================
 
+# Old habits...
+alias rehash="hash -r"
+
 # Tomcat
 alias tom="ps aux | grep \"catalina.startup.Bootstrap\" | grep -v grep"
 
