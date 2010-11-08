@@ -143,9 +143,11 @@ alias servers="sudo lsof -i -Pn"
 alias myip="ruby -e 'print `ifconfig`.map{|line| $1.dup if line !~ /127\./ and line =~ /inet ([0-9.]+)/}.compact.first'"
 
 # tcpdump
-alias sniff="sudo tcpdump -s0 -i eth0 -A"
+# use the loopback interface for local traffic
+alias sniff="sudo tcpdump -s0 -i en0 -A"
 alias couchgrep="sudo ngrep -W byline -d lo0 port 5984"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
+alias httpdump_local="sudo tcpdump -i lo0 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
 # ~~~~~ ditz
 alias dt="ditz todo"
