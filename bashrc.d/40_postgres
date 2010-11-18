@@ -1,0 +1,4 @@
+
+
+
+alias tail_postgres="sudo su postgres -c 'tail -F /opt/local/var/log/postgresql84/postgres.log'"
