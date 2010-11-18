@@ -55,36 +55,6 @@ fi
 # search path for cd
 #export CDPATH=$HOME/dev
 
-# ~~~~~ Load git completion
-#. ~/bin/.git-completion.bash
-if [ -f $GITHOME/contrib/completion/git-completion.bash ]; then
-	. $GITHOME/contrib/completion/git-completion.bash
-else
-	echo "warning: GITHOME is not defined."
-fi
-
-# Bash prompt (with git branch)
-function prompt_char {
-    git branch >/dev/null 2>/dev/null && echo '±' && return
-    hg root >/dev/null 2>/dev/null && echo '☿' && return
-    echo ''
-}
-
-function parse_git_dirty {
-  #[[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo -n " \033[1;31m*\033[0m"
-  #[[ $(git diff --cached --shortstat 2> /dev/null | tail -n1) != "" ]] && echo -n " \033[1;33m*\033[0m"
-  #[[ $(git status --porcelain 2>/dev/null| grep "^??" | tail -n1) != "" ]] && echo -n " \033[0;36m*\033[0m"
-  echo ''
-}
-
-declare -f __git_ps1 >/dev/null
-if [ "$?" -eq "0" ]; then
-  export PS1='\u@\h:\w $(__git_ps1 "(\[\033[1;32m\]$(prompt_char)\[\033[0m\]\[\033[0;36m\] %s\[\033[0m\]$(parse_git_dirty)) ")[\j]$ '
-fi
-
-# Temporary (I guess somehow my git installation is borked)
-alias fixgitrepos="chmod 755 .git/hooks/{prepare-commit-msg,commit-msg,pre-commit}"
-
 ## ============================================================================
 ## Alias definitions
 ## ============================================================================
@@ -153,84 +123,6 @@ alias httpdump_local="sudo tcpdump -i lo0 -n -s 0 -w - | grep -a -o -E \"Host\: 
 alias dt="ditz todo"
 alias ds="ditz status"
 
-# ~~~~~ git
-alias gt="git status"
-alias gb='git branch --color -v'
-alias gd='git diff --color --ignore-space-at-eol'
-alias gdi='git diff --color --ignore-space-at-eol --cached'
-alias gds='git diff --stat'
-alias gl="git log --graph --pretty=format:'%Cred%h%Creset - %Cblue[%an]%Creset%C(yellow)%d%Creset: %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
-alias gly="gl --since=yesterday"
-alias gls="git log --stat"
-alias glm='git log --author="ssaasen" --pretty=format:"%Cblue%h%Creset %Cgreen%an%Creset %ad %s %n"'
-alias gw="git whatchanged"
-# Changelog style
-alias glc="git log --abbrev-commit --pretty=medium "
-
-# Show a short commit stat
-alias gsa="git shortlog -n -s"
-# For more stat info have a look at: git clone git://repo.or.cz/gitstats.git
-
-# Show the commit that introduced a particular file
-# Usage:
-#  git-file-added ./path/to/file
-alias git-file-added="git log --diff-filter=A --pretty=short -- "
-
-
-# show current sha1 hash (abbreviated)
-alias gh="git rev-parse --short HEAD"
-
-alias gv="git describe --long"
-
-# git show --stat COMMIT_ID
-alias gss="git show --stat"
-
-# show a version of a file - important PATH MUST be the full path from the repository root. Local path (from sub directory) does not work! 
-# git show v1.4:src/main.c
-
-# will use HEAD to produce a tar archive in which each filename is preceded by "latest/"
-# use zcat latest.tar.gz | git get-tar-commit-id to get the embeded git id 
-alias gar="git archive --format=tar --prefix=latest/ HEAD | gzip >latest.tar.gz"
-# rebase -> origin/master
-alias gr="git fetch -v origin && git rebase origin/master"
-# Merge without commit to inspect changes/merge-result.
-alias gm="git merge --no-commit"
-alias gfp="git format-patch -p"
-
-# Usage
-# (1) git diff -p --raw 35AC1F > c.pat
-# (2) patch -f -p 1 < c.pat
-alias gp="git diff -p --raw"
-
-# git reflog
-alias grl="git reflog"
-
-# Untrack a file (If you want to keep a file, but not have it in the next revision).
-alias gun="git rm --cached"
-
-# show git aliases
-alias galias="git config --global --get-regexp alias"
-
-# shows what will be pushed to a remote repos
-alias gpd="git push --dry-run"
-
-
-function git_blame_single_line {
-  if [ $# -lt 2 ]; then
-    echo "Usage:       git_blame_single_line PATTERN [ANCESTOR] FILE"
-    echo ""
-    echo "    example: git_blame_single_line \"class Test\" 14jk2k13^ ./path/to/file"
-    echo ""
-    return
-  fi
-  if [ $# -eq 2 ]; then
-    git blame -M -C -L "/${1}/,+1" HEAD -- $2
-  fi
-  if [ $# -eq 3 ]; then
-    git blame -M -C -L "/${1}/,+1" ${2} -- $3
-  fi
-}
-
 function searchreplace {
 	# sed -i .bak 's/BLUE_COLOR/kBlueColor/g' *.h
   if [ $# -lt 3 ]; then
@@ -245,8 +137,6 @@ function searchreplace {
     sed "s/${1}/${2}/g" -i -- $3
   fi	
 }
-
-alias gbl="git_blame_single_line"
 
 # ~~~~~ Misc ~~~~~~~~
 # show file header. Usage: fh test.db
@@ -391,14 +281,6 @@ function netdump_local {
 function ccto {
   echo "Copying changes from $1 to $2"
   diff -u $2 $1 | patch
-}
-
-function git-revert-last-commit {
-    git branch __broken
-    git revert HEAD
-    git diff --binary master __broken > __broken.pat
-    git apply < __broken.pat
-    rm __broken.pat
 }
 
 function mem_mon {
