@@ -4,4 +4,5 @@
 # the contents of the local directory
 alias share='python -c "import SimpleHTTPServer;SimpleHTTPServer.test()"'
 
-
+# Lists all listening ports
+alias listen='lsof -Pan -i tcp -i udp'
