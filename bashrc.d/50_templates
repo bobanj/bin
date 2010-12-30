@@ -1,0 +1,11 @@
+
+alias lift-init="mvn archetype:generate \
+ -DarchetypeGroupId=net.liftweb \
+ -DarchetypeArtifactId=lift-archetype-basic_2.8.0 \
+ -DarchetypeVersion=2.1 \
+ -DarchetypeRepository=http://scala-tools.org/repo-releases \
+ -DremoteRepositories=http://scala-tools.org/repo-releases \
+ -Dversion=1.0"
+
+
+# vim: set filetype=bash
