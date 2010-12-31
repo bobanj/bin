@@ -1,0 +1,5 @@
+#!/bin/bash
+
+TOMCAT_PID=`ps aux | \grep "catalina.startup.Bootstrap" | \grep -v grep | awk '{printf "%s", $2}'`
+
+jvisualvm --nosplash --openpid $TOMCAT_PID &
