@@ -4,4 +4,4 @@ if [ -z "${VISUALGC_HOME+xxx}" ]; then
     VISUALGC_HOME="/opt/jvmstat/jars"
 fi
 TOMCAT_PID=`ps aux | \grep "catalina.startup.Bootstrap" | \grep -v grep | awk '{printf "%s", $2}'`
-java -jar $VISUALGC_HOME/visualgc.jar $TOMCAT_PID
+java -jar $VISUALGC_HOME/visualgc.jar $TOMCAT_PID &
