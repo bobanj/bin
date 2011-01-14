@@ -1,0 +1,3 @@
+[submodule "plugins/maven-growl"]
+	path = plugins/maven-growl
+	url = git://github.com/geoffreywiseman/maven-growl.git
