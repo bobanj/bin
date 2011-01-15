@@ -7,5 +7,10 @@ alias lift-init="mvn archetype:generate \
  -DremoteRepositories=http://scala-tools.org/repo-releases \
  -Dversion=1.0"
 
+alias scala-init="mvn archetype:generate \
+-DarchetypeGroupId=org.scala-tools.archetypes \
+-DarchetypeArtifactId=scala-archetype-simple \
+-DarchetypeVersion=1.1 \
+-DremoteRepositories=http://scala-tools.org/repo-release"
 
 # vim: set filetype=bash
