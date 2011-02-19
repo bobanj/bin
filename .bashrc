@@ -51,8 +51,9 @@ export PROMPT_COMMAND='echo -ne "\033]0;$(basename `pwd`)\007"'
 complete -C rake_autocomplete.rb -o default rake
 
 # ~~~~~ cdargs ~~~~~~~~~~~~
-if [ -f /opt/local/etc/profile.d/cdargs-bash.sh ]; then
-  source /opt/local/etc/profile.d/cdargs-bash.sh
+CDARGS_BASH="/usr/local/Cellar/cdargs/1.35/contrib/cdargs-bash.sh"
+if [ -f $CDARGS_BASH ]; then
+  source $CDARGS_BASH
 fi
 
 # search path for cd
