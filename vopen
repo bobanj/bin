@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Usage vopen FILENAME
+# Will recursively search for the file named FILENAME and open it in mvim
+
+mvim $(find . -iname "*$1*")
