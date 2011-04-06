@@ -59,6 +59,9 @@ fi
 # search path for cd
 #export CDPATH=$HOME/dev
 
+# ~~~~~ Load git completion
+. ${CUSTOM_BIN_DIR}/.git-completion.bash
+
 ## ============================================================================
 ## Alias definitions
 ## ============================================================================
@@ -131,6 +134,7 @@ alias httpdump_local="sudo tcpdump -i lo0 -n -s 0 -w - | grep -a -o -E \"Host\: 
 # ~~~~~ ditz
 alias dt="ditz todo"
 alias ds="ditz status"
+
 
 function searchreplace {
 	# sed -i .bak 's/BLUE_COLOR/kBlueColor/g' *.h
