@@ -20,14 +20,14 @@ function git-revert-last-commit {
 
 # Bash prompt (with git branch)
 function prompt_char {
-    #git branch >/dev/null 2>/dev/null && echo '±' && return
-    if [ -d .git ]; then
-       echo '±' && return
-    fi
+    git branch >/dev/null 2>/dev/null && echo '±' && return
+    #if [ -d .git ]; then
+    #   echo '±' && return
+    #fi
     #hg root >/dev/null 2>/dev/null && echo '☿' && return
-    if [ -d .hg ]; then
-        echo '☿' && return
-    fi
+    #if [ -d .hg ]; then
+    #    echo '☿' && return
+    #fi
     echo ''
 }
 
