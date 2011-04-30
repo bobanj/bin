@@ -38,9 +38,9 @@ function parse_scm_dirty {
   reset=$(tput sgr0)
   if [ -d .git ]; then 
     dirty=0
-    [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo -n " $green$bold*$reset" && dirty=1
-    [[ $(git diff --cached --shortstat 2> /dev/null | tail -n1) != "" ]] && echo -n " $yellow$bold*$reset" && dirty=1
-    [[ $(git status --porcelain 2>/dev/null| grep "^??" | tail -n1) != "" ]] && echo -n " $cyan$bold*$reset" && dirty=1
+    [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo -n " $green$bold+$reset" && dirty=1
+    [[ $(git diff --cached --shortstat 2> /dev/null | tail -n1) != "" ]] && echo -n " $yellow$bold^$reset" && dirty=1
+    [[ $(git status --porcelain 2>/dev/null| grep "^??" | tail -n1) != "" ]] && echo -n " $cyan$bold?$reset" && dirty=1
     if [ $dirty -eq 0 ]; then
       echo -n " $green"
       echo -n '✓ '
