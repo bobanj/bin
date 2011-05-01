@@ -96,6 +96,9 @@ alias p="ps aux | grep ^$USER"
 # Maven
 alias madness='mvn org.apache.maven.plugins:maven-dependency-plugin:RELEASE:tree'
 
+# OSGi bundles
+alias osgi="java -jar ~/bin/biz.aQute.bnd.jar print"
+
 # Ruby/Rails
 alias ss="./script/server"
 alias sd="./script/server --debugger"
