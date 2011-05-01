@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+
+def tai64_to_time(tai64)
+  raise "Invalid tai64 format" unless tai64 =~ /@40000000([\da-f]{8})([\da-f]{8})/
+  return Time.at($1.dup.hex-10, $2.dup.hex/1000.0)
+end
+
+class File
+  class << self
+    def each_line(file)
+      open(file) do |f|
+        f.each do |line|
+          yield line
+        end
+      end
+    end
+  end
+end
+
+raise "Usage: #{File.basename(__FILE__)} FILE_TO_CONVERT" if ARGV.size.eql?(0) || !File.file?(ARGV.first)
+
+
+LOGFILE = ARGV.first.freeze
+NEW_FILE = "#{LOGFILE}_datetime"
+
+
+File.open(NEW_FILE, "w") do |output|
+  File.each_line(LOGFILE) do |line|
+    tai, rest = $1.dup, $2.dup if line =~ /(@[0-9a-z]+)(.*)/
+    output << tai64_to_time(tai).strftime("%Y-%m-%d %H:%M:%S")
+    output << rest
+    output << "\n"
+  end
+end
