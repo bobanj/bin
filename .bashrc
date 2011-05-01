@@ -51,7 +51,7 @@ export PROMPT_COMMAND='echo -ne "\033]0;$(basename `pwd`)\007"'
 complete -C rake_autocomplete.rb -o default rake
 
 # ~~~~~ cdargs ~~~~~~~~~~~~
-CDARGS_BASH="/usr/local/Cellar/cdargs/1.35/contrib/cdargs-bash.sh"
+CDARGS_BASH=`brew --prefix cdargs`"/contrib/cdargs-bash.sh"
 if [ -f $CDARGS_BASH ]; then
   source $CDARGS_BASH
 fi
