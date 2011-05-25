@@ -7,7 +7,11 @@
 [alias]
 	ci = commit
 	co = checkout
-	st = status
+    st = status
+    lo = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    incoming = log $(git rev-parse HEAD)..$(git rev-parse FETCH_HEAD)
+    added = log --diff-filter=A --pretty=short --
+    outgoing = cherry -v $(git rev-parse FETCH_HEAD) $(git rev-parse HEAD)
 [diff]
 	tool = diff
 [difftool "diffmerge"]
