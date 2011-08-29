@@ -91,8 +91,8 @@ alias fixgitrepos="chmod 755 .git/hooks/{prepare-commit-msg,commit-msg,pre-commi
 alias push?='git cherry -v origin'
 alias gt="git status"
 alias gb='git branch --color -v'
-alias gd='git diff --color --ignore-space-at-eol'
-alias gdi='git diff --color --ignore-space-at-eol --cached'
+alias gd='git diff --color --ignore-space-at-eol --word-diff'
+alias gdi='git diff --color --ignore-space-at-eol --cached --word-diff'
 alias gds='git diff --stat'
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset - %Cgreen[%an]%Creset%C(yellow)%d%Creset: %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias gly="gl --since=yesterday"
@@ -101,6 +101,9 @@ alias glm='git log --author="ssaasen" --pretty=format:"%Cblue%h%Creset %Cgreen%a
 alias gw="git whatchanged"
 # Changelog style
 alias glc="git log --abbrev-commit --pretty=medium "
+
+# git-svn clone
+alias gisc="git svn clone -s --prefix=svn/"
 
 # Show a short commit stat
 alias gsa="git shortlog -n -s"
