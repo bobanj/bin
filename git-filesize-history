@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+
+# vim: set filetype=ruby
+require 'rubygems'
+
+begin
+  require 'grit'
+rescue LoadError
+  puts 'Please install the "grit" gem first.'
+  puts "\t[sudo] gem install grit"
+  exit -1
+end
+
+class Numeric
+  def to_human
+    units = %w{B KB MB GB TB}
+    e = (Math.log(self)/Math.log(1024)).floor
+    s = "%.3f" % (to_f / 1024**e)
+    s.sub(/\.?0*$/, units[e])
+  end
+end
+
+
+if ARGV.size < 1
+  puts "Usage: #{File.basename($0)} FILE"
+  puts 'Run from within the git repo root'
+  exit
+end
+
+filename = ARGV[0].to_s
+
+repo = Grit::Repo.new('.')
+commits = repo.log('master', filename)
+commits.each do |commit|
+  blob = commit.tree/filename
+  puts "#{commit} #{blob.size.to_human}"
+end
+
