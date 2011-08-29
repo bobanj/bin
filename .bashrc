@@ -60,7 +60,7 @@ fi
 #export CDPATH=$HOME/dev
 
 # ~~~~~ Load git completion
-. ${CUSTOM_BIN_DIR}/.git-completion.bash
+#. ${CUSTOM_BIN_DIR}/.git-completion.bash
 
 ## ============================================================================
 ## Alias definitions
