@@ -277,7 +277,13 @@ function create_file {
 
 
 function f {
-    find . -iname "*$1*"
+    set -e
+    result=$TMPDIR/_find_result.txt
+    # Search and store the first match in the clipboard
+    find . -iname "*$1*" | tee $result | awk -F ":| " '{print $0} NR>0{exit};0' | tr -d '\n' | pbcopy
+    # Show the searchresult
+    cat $result
+    rm -f $result
 }
 
 function netdump {
