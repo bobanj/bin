@@ -20,6 +20,9 @@ class Numeric
   end
 end
 
+def clean_path_relative(path)
+  File.expand_path(path).gsub(File.expand_path("."), '').gsub(/^\//, '')
+end
 
 if ARGV.size < 1
   puts "Usage: #{File.basename($0)} FILE"
@@ -27,12 +30,12 @@ if ARGV.size < 1
   exit
 end
 
-filename = ARGV[0].to_s
+filename = clean_path_relative(ARGV.first.to_s)
 
 repo = Grit::Repo.new('.')
 commits = repo.log('master', filename)
 commits.each do |commit|
   blob = commit.tree/filename
-  puts "#{commit} #{blob.size.to_human}"
+  puts "#{commit} #{blob.size.to_human}" if blob
 end
 
