@@ -154,6 +154,6 @@ alias gpd="git push --dry-run"
 
 alias gbl="git_blame_single_line"
 
-
+alias gsb="git show-branch"
 
 # vim: set filetype=bash
