@@ -16,3 +16,8 @@ log/*.log
 *.iwr
 *.iws
 *.iml
+.idea
+# sbt
+lib_managed
+project/boot
+src_managed
