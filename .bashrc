@@ -100,7 +100,11 @@ alias p="ps aux | grep ^$USER"
 alias madness='mvn org.apache.maven.plugins:maven-dependency-plugin:RELEASE:tree'
 
 # OSGi bundles
-alias osgi="java -jar ~/bin/biz.aQute.bnd.jar print"
+#  -verify - Verify the JAR for consistency with the specification. The print will exit with an error if the verify fails
+#  -manifest - Show the manifest
+#  -list - List the entries in the JAR file
+#  -all - Do all (this is the default)
+alias osgi="java -jar ~/bin/biz.aQute.bnd.jar print -manifest"
 
 # Ruby/Rails
 alias ss="./script/server"
