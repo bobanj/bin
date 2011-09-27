@@ -82,7 +82,8 @@ alias po="popd"
 # Default arguments for well known programs
 # Modify existing commands
 alias stat="stat -x"
-alias grep="grep -n --color=auto"
+# grep -n -> line numbers
+alias grep="grep --color=auto"
 alias nl="nl -b a"
 
 # ~~~~~ shortcuts
