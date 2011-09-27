@@ -36,7 +36,12 @@ function parse_scm_dirty {
   green=$(tput setaf 2)
   yellow=$(tput setaf 3)
   reset=$(tput sgr0)
-  if [ -d .git ]; then 
+  git_branch=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
+  
+  if [ !git rev-parse --git-dir > /dev/null 2>&1 ]; then
+      return 0
+  fi
+  
     dirty=0
     [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo -n " $green$bold+$reset" && dirty=1
     [[ $(git diff --cached --shortstat 2> /dev/null | tail -n1) != "" ]] && echo -n " $yellow$bold^$reset" && dirty=1
@@ -46,9 +51,6 @@ function parse_scm_dirty {
       echo -n '✓ '
       echo -n "$reset"
     fi
-  else
-    echo ''
-  fi
 }
 
 
