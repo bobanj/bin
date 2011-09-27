@@ -95,6 +95,8 @@ alias gt="git status"
 alias gb='git branch --color -v'
 # --word-diff
 alias gd='git diff --color --ignore-space-at-eol'
+# Check for whitespace problems
+alias gdc='git diff --check'
 alias gdi='git diff --color --ignore-space-at-eol --cached'
 alias gds='git diff --stat'
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset - %Cgreen[%an]%Creset%C(yellow)%d%Creset: %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
@@ -105,8 +107,9 @@ alias gw="git whatchanged"
 # Changelog style
 alias glc="git log --abbrev-commit --pretty=medium "
 
-# git-svn clone
+# git-svn
 alias gisc="git svn clone -s --prefix=svn/"
+alias gsr="git svn rebase"
 
 # Show a short commit stat
 alias gsa="git shortlog -n -s"
