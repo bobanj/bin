@@ -144,7 +144,10 @@ alias gfp="git format-patch -p"
 # Usage
 # (1) git diff -p --raw 35AC1F > c.pat
 # (2) patch -f -p 1 < c.pat
-alias gp="git diff -p --raw"
+alias gdp="git diff -p --raw"
+
+# Pull --rebase
+alias gp="git pull --rebase"
 
 # git reflog
 alias grl="git reflog"

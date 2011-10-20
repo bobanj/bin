@@ -280,6 +280,9 @@ function create_file {
 # dd if=/dev/random of=out.txt bs=1000000 count=100
 }
 
+function fd {
+  find . -iname "*$1*" -type d
+}
 
 function f {
     set -e
