@@ -80,7 +80,7 @@ if [ "$?" -eq "0" ]; then
   bold=$(tput bold)
   reset=$(tput sgr0)
   #export PS1='\u@\h:\w $(__git_ps1 "(\[\033[1;32m\]$(prompt_char)\[\033[0m\]\[\033[0;36m\] %s\[\033[0m\]$(parse_scm_dirty)) ")[\j]$ '
-  export PS1='\u@\h:\w $(__git_ps1 "(\[$green$bold\]$(prompt_char)\[$reset\] \[$branch_name\]%s\[$reset\]$(parse_scm_dirty)) ")[\j]\n$> '
+  export PS1='\u@\h:\w $(__git_ps1 "(\[$green$bold\]$(prompt_char)\[$reset\] \[$branch_name\]%s\[$reset\]$(parse_scm_dirty)) ")[\j]\n[\!] $> '
 fi
 
 # ==================================================================================
