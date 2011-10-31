@@ -40,8 +40,10 @@ bind -f ${CUSTOM_BIN_DIR}/.bash_key_bindings
 ## Bash settings
 ## ============================================================================
 #Bash History
+# http://www.faqs.org/docs/bashman/bashref_106.html
 export HISTCONTROL=erasedups
 export HISTSIZE=5000
+# Append to the history file instead of overwriting it from multiple shells
 shopt -s histappend
 
 # Set xterm title
@@ -401,6 +403,8 @@ alias flushcache="dscacheutil -flushcache"
 # ~~~~~ Bash customization shortcut
 alias bashrc="mate -w ~/bin/.bashrc && source ~/.bash_profile && cp ~/bin/.irbrc ~/"
 alias bashstats="cut -f1 -d\" \" ~/.bash_history | sort | uniq -c | sort -nr | head -n 50"
+
+alias clearhistory="history -c && rm -f ~/.bash_history"
 
 # copy/paste
 alias pc=pbcopy
