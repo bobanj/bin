@@ -12,6 +12,7 @@
     incoming = log $(git rev-parse HEAD)..$(git rev-parse FETCH_HEAD)
     added = log --diff-filter=A --pretty=short --
     outgoing = cherry -v $(git rev-parse FETCH_HEAD) $(git rev-parse HEAD)
+    affected-paths = diff-tree  --name-only -r
     serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
 [diff]
 	tool = diff
