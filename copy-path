@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+FILE=$1
+CUR_DIR=$(pwd)
+
+FULLPATH="${CUR_DIR}/${FILE}"
+
+echo -n $FULLPATH | pbcopy
+echo "Copied path: ${FULLPATH} to the clipboard"
