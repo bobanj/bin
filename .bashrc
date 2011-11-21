@@ -46,6 +46,9 @@ export HISTSIZE=5000
 # Append to the history file instead of overwriting it from multiple shells
 shopt -s histappend
 
+# Use vanilla vim for the "fc" command
+export FCEDIT="vim"
+
 # Set xterm title
 export PROMPT_COMMAND='echo -ne "\033]0;$(basename `pwd`)\007"'
 
