@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# vim :set ft=sh
+
+# Return the name of the current branch
+function current_branch {
+    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'; 
+}
+
+CURRENT_BRANCH=`current_branch`
+
+# What branch are we tracking?
+TRACKING=$(git config branch.${CURRENT_BRANCH}.merge | ruby -ne 'print $_.split(/\//).last')
+
+# What's the name of the remote?
+REMOTE=$(git config branch.${CURRENT_BRANCH}.remote)
+
+# Log options
+OPTS="--pretty=oneline --abbrev-commit --decorate"
+
+# URL of the remote we are tracking
+REMOTE_URL=$(git remote -v | ruby -e "puts STDIN.each_line.grep(/^${REMOTE}/).first.split[1]")
+
+
+# E.g. for 'master':
+#  git log master..origin/master
+echo "Local changes that need to be pushed:"
+env PAGER="" git log $OPTS ${REMOTE}/${TRACKING}..${CURRENT_BRANCH}
+
