@@ -75,6 +75,7 @@ alias m="mvim"
 
 # Old habits...
 alias rehash="hash -r"
+alias vmstat="vm_stat"
 
 # Tomcat
 alias tom="ps aux | grep \"catalina.startup.Bootstrap\" | grep -v grep"
@@ -125,6 +126,8 @@ alias dtfiles-hist="echo 'Hit CTRL-C to see a list of files accessed.' && sudo d
 
 # Remove ~ files
 alias cl="find . -name "*~" | xargs rm"
+# Remove IntelliJ IDEA project files
+alias idea-clean='find . -name "*.ipr" -o -name "*.iml" -o -name "*.iws" | xargs rm'
 
 alias sha1sum="openssl dgst -sha1 "
 
