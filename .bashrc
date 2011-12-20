@@ -52,6 +52,9 @@ export FCEDIT="vim"
 # Set xterm title
 export PROMPT_COMMAND='echo -ne "\033]0;$(basename `pwd`)\007"'
 
+# Use vim for viewing manpages
+export MANPAGER="col -b | view -c 'set ft=man nomod nolist' -"
+
 # Rake autocomplete
 complete -C rake_autocomplete.rb -o default rake
 
