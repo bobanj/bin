@@ -27,6 +27,7 @@ if [ -d $CUSTOM_BIN_DIR/bashrc.d ]; then
         . $bashrc
     done
 fi
+
 # Include host-specific .bashrc file
 [ -f $CUSTOM_BIN_DIR/bashrc.d/`hostname -s` ] && . $CUSTOM_BIN_DIR/bashrc.d/`hostname -s`
 
@@ -35,6 +36,17 @@ bind -f ${CUSTOM_BIN_DIR}/.bash_key_bindings
 
 # show bindings:
 # bind -P
+
+# Custom prompt
+declare -f __git_ps1 >/dev/null
+if [ "$?" -eq "0" ]; then
+  green=$(tput setaf 2)
+  blue=$(tput setaf 4)
+  branch_name=$(tput bold; tput setaf 4)
+  bold=$(tput bold)
+  reset=$(tput sgr0)
+  export PS1='\u@\h:\w $(__git_ps1 "(\[$green$bold\]$(prompt_char)\[$reset\] \[$branch_name\]%s\[$reset\]$(parse_scm_dirty)) ")[\j]\n[\!] λ > '
+fi
 
 ## ============================================================================
 ## Bash settings
