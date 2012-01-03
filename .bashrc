@@ -102,7 +102,6 @@ alias ".."="cd .."
 alias h="history"
 alias cd..='cd ..'
 alias d='dict'
-alias h='history'
 alias p="ps aux | grep ^$USER"
 
 
