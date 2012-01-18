@@ -182,56 +182,7 @@ function searchreplace {
 # show file header. Usage: fh test.db
 alias fh="od -c -N 16 "
 
-# Adds a site to an existing maven project.
-# ! Should be run from inside a maven project. 
-alias mvn-add-site="mvn archetype:create -DarchetypeArtifactId=maven-archetype-site"
 
-function mvn-help {
-  if [ ! $# == 1 ]; then
-    echo "Usage:       mvn-help PLUGINNAME"
-    echo ""
-    echo "    example: mvn-help install"
-    echo ""
-    return
-  fi
-	mvn help:describe -Dplugin=$1
-}
-
-function mvn-create {
-  if [ ! $# == 2 ]; then
-    echo "Usage:       mvn-create GROUPID ARTIFACT ID"
-    echo ""
-    echo "    example: mvn-create com.coravy.jwddx jwddx"
-    echo ""
-    return
-  fi
-  #mvn archetype:create -DarchetypeGroupId=org.apache.maven.archetypes -DgroupId=$1 -DartifactId=$2
-mvn archetype:generate -DarchetypeGroupId=com.coravy.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.0-SNAPSHOT -DgroupId=$1 -DartifactId=$2
-}
-
-function mvn-create-webapp {
-  if [ ! $# == 2 ]; then
-    echo "Usage:       mvn-create-webapp GROUPID ARTIFACT ID"
-    echo ""
-    echo "    example: mvn-create-webapp com.coravy.web corporate"
-    echo ""
-    return
-  fi
-  mvn archetype:create -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-webapp \
-         -DgroupId=$1 -DartifactId=$2
-}
-
-
-function mvn-create-custom-archetype {
-  if [ ! $# == 2 ]; then
-    echo "Usage:       mvn-create-webapp GROUPID ARTIFACT ID"
-    echo ""
-    echo "    example: mvn-create-webapp com.coravy maven-archetype-standalone"
-    echo ""
-    return
-  fi
-  mvn archetype:create -DgroupId=$1 -DartifactId=$2 -DarchetypeArtifactId=maven-archetype-archetype
-}
 
 # ~~~~~ darcs
 alias dw="darcs whatsnew -l"
