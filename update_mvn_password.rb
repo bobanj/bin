@@ -17,7 +17,7 @@ def replace_token_in_file(replacement, file)
   lines = IO.readlines(file)
   File.open(file, 'w') do |f|
     lines.each do |line|
-      f << line.gsub(/\{.+?\}/) {|s| replacement}
+      f << line.gsub(/<password>\{.+?\}<\/password>/) {|s| "<password>#{replacement}</password>" }
     end
   end
 end
@@ -27,7 +27,7 @@ command :master do |c|
   c.description = 'Update the master password'
   c.action do |args, options|
     pw = password "Enter a new master password please:", '*'
-    mvn_pw = `mvn --encrypt-master-password #{pw}`.strip
+    mvn_pw = `mvn --encrypt-master-password '#{pw}'`.strip
     replace_token_in_file mvn_pw,  "~/.m2/settings-security.xml"
   end
 end
@@ -39,7 +39,8 @@ command :password do |c|
   c.option '--unsecure', 'Don\'t encrypt the password'
   c.action do |args, options|
     pw = password "Enter a new password please:", '*'
-    mvn_pw = options.unsecure ? pw : `mvn --encrypt-password #{pw}`.strip
+    mvn_pw = options.unsecure ? pw : `mvn --encrypt-password '#{pw}'`.strip
+    puts "Using mvn password: #{mvn_pw[0..5]}"
     replace_token_in_file mvn_pw,  "~/.m2/settings.xml"
   end
 end
