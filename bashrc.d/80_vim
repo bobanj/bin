@@ -1,0 +1,4 @@
+# Use mvim on Mac OS X
+if command_exists mvim; then
+    alias vim="mvim -v"
+fi
