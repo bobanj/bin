@@ -10,14 +10,6 @@ else
 	echo "warning: GITHOME is not defined."
 fi
 
-function git-revert-last-commit {
-    git branch __broken
-    git revert HEAD
-    git diff --binary master __broken > __broken.pat
-    git apply < __broken.pat
-    rm __broken.pat
-}
-
 # Bash prompt (with git branch)
 function prompt_char {
     git branch >/dev/null 2>/dev/null && echo '±' && return
