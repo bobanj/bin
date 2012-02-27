@@ -10,7 +10,7 @@ function current_branch {
 CURRENT_BRANCH=`current_branch`
 
 # What branch are we tracking?
-TRACKING=$(git config branch.${CURRENT_BRANCH}.merge | ruby -ne 'print $_.split(/\//).last')
+TRACKING=$(git config branch.${CURRENT_BRANCH}.merge | ruby -ne 'print $_.gsub(/refs\/heads\//, "").strip')
 
 # What's the name of the remote?
 REMOTE=$(git config branch.${CURRENT_BRANCH}.remote)
