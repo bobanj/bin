@@ -2,6 +2,17 @@
 
 # vim :set ft=sh
 
+# Show the changes on the remote that would be pulled in.
+# The script fetches all the changes first.
+#
+# If this script is in your $PATH it can be called like this:
+#
+#   git incoming
+#
+# The script requires git and ruby to be installed on your system.
+#
+# Copied from: https://raw.github.com/juretta/bin/master/git-incoming
+
 # Return the name of the current branch
 function current_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'; 
@@ -23,10 +34,15 @@ REMOTE_URL=$(git remote -v | ruby -e "puts STDIN.each_line.grep(/^${REMOTE}/).fi
 
 # Fetch the changes from the remote.
 echo "Fetching changes from '"${REMOTE}"' (${REMOTE_URL})"
-git fetch
+git fetch -q
 
 # E.g. for 'master':
 #  git log master..origin/master
-echo "Changes in the remote branch:"
-env PAGER="" git log $OPTS ${CURRENT_BRANCH}..${REMOTE}/${TRACKING}
+CHANGES=(env PAGER="" git log $OPTS ${CURRENT_BRANCH}..${REMOTE}/${TRACKING})
+if [ $? -eq 0 ]; then
+    echo "No changes on ${REMOTE} that are not already available on this branch."
+else
+    echo "Changes on ${REMOTE}:"
+    echo $CHANGES
+fi
 
