@@ -38,7 +38,7 @@ git fetch -q
 
 # E.g. for 'master':
 #  git log master..origin/master
-CHANGES=(env PAGER="" git log $OPTS ${CURRENT_BRANCH}..${REMOTE}/${TRACKING})
+CHANGES=(env PAGER="" git log --color --exit-code $OPTS ${CURRENT_BRANCH}..${REMOTE}/${TRACKING})
 if [ $? -eq 0 ]; then
     echo "No changes on ${REMOTE} that are not already available on this branch."
 else
